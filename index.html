@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoMechanica - Eksplorasi Mesin Sepeda Motor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        industrial: {
+                            900: '#0c0f12',
+                            800: '#151921',
+                            700: '#1f2633',
+                            600: '#2d3748',
+                            accent: '#ff5722',
+                            steel: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0f12;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0c0f12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3748;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff5722;
+        }
+        .glass-panel {
+            background: rgba(21, 25, 33, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .engine-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .engine-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 87, 34, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(255, 87, 34, 0.15);
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .glow-effect {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-industrial-900 text-slate-100 min-h-screen selection:bg-industrial-accent selection:text-white">
+
+    <!-- Background Industrial Accent Glows -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-industrial-accent/10 rounded-full blur-3xl pointer-events-none glow-effect"></div>
+    <div class="fixed bottom-10 right-1/4 w-[30rem] h-[30rem] bg-blue-600/5 rounded-full blur-3xl pointer-events-none glow-effect"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-white/5 px-6 lg:px-16 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-industrial-accent to-amber-600 flex items-center justify-center shadow-lg shadow-industrial-accent/20">
+                <i class="fa-solid fa-gears text-white text-lg"></i>
+            </div>
+            <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-slate-200 to-industrial-steel bg-clip-text text-transparent">
+                MOTO<span class="text-industrial-accent">MECHANICA</span>
+            </span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+            <a href="#beranda" class="hover:text-industrial-accent transition-colors">Beranda</a>
+            <a href="#katalog" class="hover:text-industrial-accent transition-colors">Katalog Mesin</a>
+            <a href="#simulator" class="hover:text-industrial-accent transition-colors">Kalkulator Konfigurasi</a>
+        </div>
+        <button onclick="scrollToSection('katalog')" class="bg-industrial-accent hover:bg-orange-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-industrial-accent/20 hover:shadow-industrial-accent/40 active:scale-95">
+            Jelajahi Mesin
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="beranda" class="relative pt-20 pb-28 px-6 lg:px-16 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div class="flex-1 text-center lg:text-left z-10">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-white/10 text-xs font-semibold text-industrial-accent mb-6">
+                <i class="fa-solid fa-fire-flame-curved"></i> Evolusi Performa Pembakaran Internal
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                Mengenal Anatomi & Jiwa <span class="bg-gradient-to-r from-industrial-accent to-amber-500 bg-clip-text text-transparent">Mesin Motor</span>
+            </h1>
+            <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-8 font-light leading-relaxed">
+                Pelajari karakteristik, keunikan konfigurasi, dan rahasia performa dari berbagai jenis mesin sepeda motor legendaris dunia. Dari satu silinder hingga konfigurasi Boxer yang bertenaga.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <button onclick="scrollToSection('katalog')" class="w-full sm:w-auto bg-industrial-accent hover:bg-orange-600 text-white font-semibold px-8 py-3.5 rounded-xl transition-all shadow-xl shadow-industrial-accent/25 flex items-center justify-center gap-3">
+                    <span>Lihat Daftar Mesin</span>
+                    <i class="fa-solid fa-arrow-down-long"></i>
+                </button>
+                <button onclick="scrollToSection('simulator')" class="w-full sm:w-auto glass-panel hover:bg-white/10 text-slate-200 font-semibold px-8 py-3.5 rounded-xl transition-all border border-white/10 flex items-center justify-center gap-3">
+                    <span>Cek Karakteristik</span>
+                    <i class="fa-solid fa-sliders text-industrial-accent"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hero Visual / Graphic Card -->
+        <div class="flex-1 w-full max-w-lg lg:max-w-none relative">
+            <div class="relative glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl overflow-hidden group">
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-industrial-accent/15 rounded-full blur-2xl group-hover:bg-industrial-accent/25 transition-all"></div>
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Featured Engine</span>
+                    </div>
+                    <span class="text-xs px-3 py-1 rounded-full bg-industrial-accent/20 text-industrial-accent font-semibold">Inline-4 Superbike</span>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden mb-6 aspect-video bg-industrial-800 flex items-center justify-center border border-white/5">
+                    <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80" alt="Inline 4 Engine" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/800x450/151921/ff5722?text=Inline-4+Engine'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-industrial-900 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Liquid-Cooled DOHC 16V</h3>
+                            <p class="text-xs text-slate-300">Redline hingga 14.000 RPM</p>
+                        </div>
+                        <span class="text-xs bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">200+ HP</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div class="glass-panel p-3 rounded-xl border border-white/5">
+                        <span class="text-xs text-slate-400 block mb-1">Konfigurasi</span>
+                        <span class="text-sm font-bold text-white">4 Silinder Segaris</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl border border-white/5">
+                        <span class="text-xs text-slate-400 block mb-1">Torsi Utama</span>
+                        <span class="text-sm font-bold text-white">Putaran Atas</span>
+                    </div>
+                    <div class="glass-panel p-3 rounded-xl border border-white/5">
+                        <span class="text-xs text-slate-400 block mb-1">Karakter</span>
+                        <span class="text-sm font-bold text-white">Sangat Halus</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Engine Catalog Section -->
+    <section id="katalog" class="py-20 px-6 lg:px-16 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Katalog Konfigurasi Mesin</h2>
+            <p class="text-slate-400 text-sm sm:text-base">Setiap konfigurasi mesin memiliki keunikan suara, getaran, pengantaran tenaga, dan peruntukan yang berbeda.</p>
+            
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mt-8">
+                <button onclick="filterEngines('all')" class="filter-btn active-filter px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-industrial-accent text-white transition-all shadow-md">Semua</button>
+                <button onclick="filterEngines('single')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-slate-300 hover:bg-white/10 transition-all">Single-Cylinder</button>
+                <button onclick="filterEngines('twin')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-slate-300 hover:bg-white/10 transition-all">Twin (Parallel & V)</button>
+                <button onclick="filterEngines('multi')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-slate-300 hover:bg-white/10 transition-all">Multi-Cylinder (Inline-4/Boxer/Inline-3)</button>
+            </div>
+        </div>
+
+        <!-- Engines Grid -->
+        <div id="engines-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Engine Card 1: Single-Cylinder -->
+            <div class="engine-card glass-panel rounded-3xl overflow-hidden border border-white/10 flex flex-col" data-category="single">
+                <div class="relative h-52 bg-industrial-800 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1609630875171-b13217773a48?auto=format&fit=crop&w=600&q=80" alt="Single Cylinder Engine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/151921/ff5722?text=Single-Cylinder'">
+                    <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-industrial-accent border border-white/10">
+                        Single-Cylinder (Thumper)
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Single-Cylinder / Silinder Tunggal</h3>
+                        <p class="text-slate-400 text-sm mb-6 font-light">
+                            Mesin paling sederhana dengan satu piston. Dikenal karena torsi bawah yang sangat kuat, bobot ringan, dan efisiensi tinggi. Cocok untuk motor off-road, adventure ringan, dan komuter perkotaan.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Karakter Torsi</span>
+                                <span class="text-sm font-semibold text-white">Kuat di Putaran Bawah</span>
+                            </div>
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Penggunaan Umum</span>
+                                <span class="text-sm font-semibold text-white">Dual-Sport / Enduro</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('single')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-industrial-accent text-slate-200 hover:text-white font-semibold text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
+                        <span>Spesifikasi & Detail</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Engine Card 2: Parallel-Twin -->
+            <div class="engine-card glass-panel rounded-3xl overflow-hidden border border-white/10 flex flex-col" data-category="twin">
+                <div class="relative h-52 bg-industrial-800 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80" alt="Parallel Twin Engine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/151921/ff5722?text=Parallel-Twin'">
+                    <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-industrial-accent border border-white/10">
+                        Parallel-Twin
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Parallel-Twin / Dua Silinder Sejajar</h3>
+                        <p class="text-slate-400 text-sm mb-6 font-light">
+                            Dua silinder berdampingan secara horizontal. Desain modern sering menggunakan *270° crank* untuk menghasilkan suara dan traksi mirip V-Twin, sangat populer di motor mid-range masa kini.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Karakter Torsi</span>
+                                <span class="text-sm font-semibold text-white">Merata & Fleksibel</span>
+                            </div>
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Penggunaan Umum</span>
+                                <span class="text-sm font-semibold text-white">Naked / Adventure Mid</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('parallel-twin')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-industrial-accent text-slate-200 hover:text-white font-semibold text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
+                        <span>Spesifikasi & Detail</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Engine Card 3: V-Twin -->
+            <div class="engine-card glass-panel rounded-3xl overflow-hidden border border-white/10 flex flex-col" data-category="twin">
+                <div class="relative h-52 bg-industrial-800 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80" alt="V-Twin Engine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/151921/ff5722?text=V-Twin'">
+                    <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-industrial-accent border border-white/10">
+                        V-Twin (90° / 45°)
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">V-Twin / Dua Silinder Bentuk V</h3>
+                        <p class="text-slate-400 text-sm mb-6 font-light">
+                            Silinder membentuk sudut tertentu (misal 45° pada cruiser klasik atau 90° pada sportbike Ducati). Terkenal dengan dentuman suara denyut knalpot yang khas dan torsi melimpah di putaran menengah.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Karakter Torsi</span>
+                                <span class="text-sm font-semibold text-white">Kuat & Berdenyut</span>
+                            </div>
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Penggunaan Umum</span>
+                                <span class="text-sm font-semibold text-white">Cruiser & V-Sport</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('v-twin')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-industrial-accent text-slate-200 hover:text-white font-semibold text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
+                        <span>Spesifikasi & Detail</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Engine Card 4: Inline-4 -->
+            <div class="engine-card glass-panel rounded-3xl overflow-hidden border border-white/10 flex flex-col" data-category="multi">
+                <div class="relative h-52 bg-industrial-800 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80" alt="Inline 4 Engine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/151921/ff5722?text=Inline-4'">
+                    <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-industrial-accent border border-white/10">
+                        Inline-4 (Four-Cylinder)
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Inline-4 / Empat Silinder Segaris</h3>
+                        <p class="text-slate-400 text-sm mb-6 font-light">
+                            Standar emas performa tinggi pada motor sport modern. Menghasilkan getaran minimum karena keseimbangan mekanis yang sempurna, dengan raungan RPM tinggi yang sangat memekakkan adrenalin.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Karakter Torsi</span>
+                                <span class="text-sm font-semibold text-white">Dahsyat di Putaran Atas</span>
+                            </div>
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Penggunaan Umum</span>
+                                <span class="text-sm font-semibold text-white">Superbike / Sport Tour</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('inline-4')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-industrial-accent text-slate-200 hover:text-white font-semibold text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
+                        <span>Spesifikasi & Detail</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Engine Card 5: Boxer (Flat-Twin) -->
+            <div class="engine-card glass-panel rounded-3xl overflow-hidden border border-white/10 flex flex-col" data-category="multi">
+                <div class="relative h-52 bg-industrial-800 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558980664-3a031cf67ea8?auto=format&fit=crop&w=600&q=80" alt="Boxer Engine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/151921/ff5722?text=Boxer-Engine'">
+                    <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-industrial-accent border border-white/10">
+                        Boxer / Flat-Twin
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Boxer (Flat-Twin) / Silinder Berlawanan</h3>
+                        <p class="text-slate-400 text-sm mb-6 font-light">
+                            Dua silinder mendatar berlawanan arah yang saling menetralkan getaran primer secara alami. Memberikan pusat gravitasi motor yang sangat rendah dan stabil, ikonik pada lini motor BMW GS / RT.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Karakter Torsi</span>
+                                <span class="text-sm font-semibold text-white">Stabil & Halus</span>
+                            </div>
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Penggunaan Umum</span>
+                                <span class="text-sm font-semibold text-white">Adventure Touring Besar</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('boxer')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-industrial-accent text-slate-200 hover:text-white font-semibold text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
+                        <span>Spesifikasi & Detail</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Engine Card 6: Inline-3 (Triple) -->
+            <div class="engine-card glass-panel rounded-3xl overflow-hidden border border-white/10 flex flex-col" data-category="multi">
+                <div class="relative h-52 bg-industrial-800 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=600&q=80" alt="Inline 3 Engine" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x400/151921/ff5722?text=Inline-3'">
+                    <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-industrial-accent border border-white/10">
+                        Inline-3 (Triple)
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Inline-3 / Tiga Silinder Segaris</h3>
+                        <p class="text-slate-400 text-sm mb-6 font-light">
+                            Titik tengah sempurna antara torsi bawah mesin twin dan tenaga atas mesin 4 silinder. Populer pada motor naked streetfighter premium asal Eropa seperti Triumph dan Yamaha MT-09.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Karakter Torsi</span>
+                                <span class="text-sm font-semibold text-white">Responsif & Agresif</span>
+                            </div>
+                            <div class="bg-industrial-800/80 p-2.5 rounded-xl border border-white/5 text-center">
+                                <span class="text-xs text-slate-400 block">Penggunaan Umum</span>
+                                <span class="text-sm font-semibold text-white">Naked / Sport Roadster</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="openModal('inline-3')" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-industrial-accent text-slate-200 hover:text-white font-semibold text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
+                        <span>Spesifikasi & Detail</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Configurator / Simulator Section -->
+    <section id="simulator" class="py-20 px-6 lg:px-16 max-w-7xl mx-auto">
+        <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-industrial-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="max-w-xl mb-10">
+                <span class="text-xs uppercase tracking-widest text-industrial-accent font-bold block mb-2">Simulasi & Estimasi Karakter</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">Pilih Kebutuhan Berkendara Anda</h2>
+                <p class="text-slate-400 text-sm">Temukan rekomendasi konfigurasi mesin motor terbaik berdasarkan gaya berkendara pilihan Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <!-- Controls -->
+                <div class="space-y-6 lg:col-span-1">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-300 font-bold mb-2">1. Gaya Utama Berkendara</label>
+                        <select id="sim-style" class="w-full bg-industrial-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-industrial-accent">
+                            <option value="touring">Adventure & Long Distance Touring</option>
+                            <option value="speed">High Speed Track & Sport Riding</option>
+                            <option value="city">Commuting & Urban Daily Riding</option>
+                            <option value="cruising">Relaxed Cruising & Sound Character</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-300 font-bold mb-2">2. Prioritas Performa</label>
+                        <select id="sim-priority" class="w-full bg-industrial-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-industrial-accent">
+                            <option value="torsi">Torsi Bawah (Tarikan Awal Responsif)</option>
+                            <option value="hp">Tenaga Puncak (Top Speed Tinggi)</option>
+                            <option value="efficiency">Efisiensi Bahan Bakar & Kehalusan</option>
+                        </select>
+                    </div>
+
+                    <button onclick="calculateRecommendation()" class="w-full bg-industrial-accent hover:bg-orange-600 text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-industrial-accent/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calculator"></i>
+                        <span>Hitung Rekomendasi Mesin</span>
+                    </button>
+                </div>
+
+                <!-- Result Box -->
+                <div id="sim-result" class="lg:col-span-2 bg-industrial-800/90 p-6 sm:p-8 rounded-2xl border border-white/10 flex flex-col justify-center min-h-[260px]">
+                    <div id="result-placeholder" class="text-center text-slate-400">
+                        <i class="fa-solid fa-gears text-4xl mb-3 text-industrial-accent/50 block"></i>
+                        <p class="text-sm">Silakan pilih parameter di sebelah kiri lalu klik tombol "Hitung Rekomendasi Mesin" untuk melihat hasilnya.</p>
+                    </div>
+                    <div id="result-content" class="hidden">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span id="res-badge" class="px-3 py-1 rounded-full bg-industrial-accent/20 text-industrial-accent text-xs font-semibold">Recommended</span>
+                            <h3 id="res-title" class="text-xl font-bold text-white">Nama Mesin</h3>
+                        </div>
+                        <p id="res-desc" class="text-slate-300 text-sm mb-4 font-light leading-relaxed">Penjelasan rekomendasi...</p>
+                        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 text-xs">
+                            <div>
+                                <span class="text-slate-400 block mb-1">Kelebihan Utama:</span>
+                                <span id="res-pro" class="text-white font-medium">-</span>
+                            </div>
+                            <div>
+                                <span class="text-slate-400 block mb-1">Rekomendasi Kapasitas:</span>
+                                <span id="res-cc" class="text-white font-medium">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Information Modal -->
+    <div id="engine-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-2xl rounded-3xl p-6 sm:p-8 border border-white/15 relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="modal-container">
+            <button onclick="closeModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-4">
+                <span id="modal-tag" class="px-3 py-1 rounded-full bg-industrial-accent/20 text-industrial-accent text-xs font-semibold">Kategori</span>
+            </div>
+            <h2 id="modal-title" class="text-2xl sm:text-3xl font-extrabold text-white mb-4">Judul Mesin</h2>
+            <p id="modal-desc" class="text-slate-300 text-sm sm:text-base font-light leading-relaxed mb-6">Deskripsi lengkap mesin...</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div class="bg-industrial-800 p-4 rounded-2xl border border-white/5">
+                    <span class="text-xs text-slate-400 block mb-1">Karakter Suara & Getaran</span>
+                    <p id="modal-sound" class="text-sm font-semibold text-white">-</p>
+                </div>
+                <div class="bg-industrial-800 p-4 rounded-2xl border border-white/5">
+                    <span class="text-xs text-slate-400 block mb-1">Kelebihan Mekanis</span>
+                    <p id="modal-advantage" class="text-sm font-semibold text-white">-</p>
+                </div>
+            </div>
+
+            <div class="bg-industrial-800/60 p-4 rounded-2xl border border-white/5 flex items-center justify-between text-xs sm:text-sm">
+                <span class="text-slate-400">Contoh Penggunaan Motor Populer:</span>
+                <span id="modal-examples" class="font-bold text-industrial-accent text-right">-</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-industrial-900 py-12 px-6 lg:px-16 text-center text-slate-500 text-xs sm:text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-industrial-accent flex items-center justify-center text-white">
+                    <i class="fa-solid fa-gears text-sm"></i>
+                </div>
+                <span class="font-bold text-white tracking-wider">MOTOMECHANICA</span>
+            </div>
+            <p>@sembaramekanik</p>
+            <div class="flex space-x-4 text-slate-400">
+                <a href="#beranda" class="hover:text-industrial-accent transition-colors"><i class="fa-solid fa-house"></i></a>
+                <a href="#katalog" class="hover:text-industrial-accent transition-colors"><i class="fa-solid fa-book"></i></a>
+                <a href="#simulator" class="hover:text-industrial-accent transition-colors"><i class="fa-solid fa-sliders"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const engineData = {
+            'single': {
+                tag: 'Single-Cylinder (Thumper)',
+                title: 'Mesin Silinder Tunggal (Thumper)',
+                desc: 'Mesin silinder tunggal adalah desain paling dasar namun sangat efisien dalam mekanika pembakaran internal. Dengan hanya satu piston yang bergerak naik turun di satu blok silinder, mesin ini memiliki bobot yang sangat ringan, struktur yang ringkas, serta biaya perawatan yang ekonomis.',
+                sound: 'Dentuman teratur bertempo khas di putaran rendah, berubah menjadi suara getaran kuat saat RPM ditingkatkan.',
+                advantage: 'Torsi bawah sangat responsif, mudah dikendalikan di jalur sempit/off-road, dan minim komponen mekanis kompleks.',
+                examples: 'Kawasaki KLX 250, KTM 390 Duke, Yamaha WR 155R'
+            },
+            'parallel-twin': {
+                tag: 'Parallel-Twin',
+                title: 'Mesin Dua Silinder Sejajar (Parallel-Twin)',
+                desc: 'Konfigurasi dua silinder yang berdampingan secara paralel. Desain modern menggunakan crankshaft 270 derajat untuk mereplikasi karakteristik penyalaan layaknya mesin V-Twin, memberikan traksi ban belakang yang optimal saat keluar tikungan.',
+                sound: 'Suara menggelegar mirip V-Twin pada konfigurasi 270°, atau suara merdu halus pada konfigurasi 180°.',
+                advantage: 'Lebih ramping dari V-Twin, bobot seimbang, dan sangat fleksibel untuk berbagai jenis motor dari sport hingga adventure.',
+                examples: 'Yamaha R7 / MT-07, Kawasaki Ninja 650, Honda CB500X'
+            },
+            'v-twin': {
+                tag: 'V-Twin (90° / 45°)',
+                title: 'Mesin Dua Silinder Bentuk V (V-Twin)',
+                desc: 'Dua silinder yang membentuk sudut V dengan sudut tertentu. Sudut 45 derajat populer pada cruiser Amerika untuk sensasi getaran dan suara dentuman ikonik, sementara sudut 90 derajat (L-Twin) menawarkan keseimbangan sempurna pada motor sport Italia.',
+                sound: 'Dentuman bass berat yang dalam dan sangat khas (*potato-potato* pada cruiser atau raungan serak pada sportbike).',
+                advantage: 'Torsi menengah sangat melimpah, profil mesin memanjang yang memberikan stabilitas garis lurus.',
+                examples: 'Harley-Davidson Sportster, Ducati Panigale V2, Suzuki V-Strom 650'
+            },
+            'inline-4': {
+                tag: 'Inline-4 (Four-Cylinder)',
+                title: 'Mesin Empat Silinder Segaris (Inline-4)',
+                desc: 'Empat silinder yang berbaris rapi dalam satu garis horizontal. Menjadi standar emas motor performa tinggi karena putaran mesin (RPM) yang bisa mencapai batas sangat tinggi dengan keseimbangan mekanis primer yang luar biasa halus.',
+                sound: 'Jeritan melengking bernada tinggi (*screamer*) khas motor balap MotoGP saat mendekati garis redline.',
+                advantage: 'Tenaga puncak (horsepower) sangat besar di putaran atas, minim getaran fisik pada pengendara.',
+                examples: 'Kawasaki Ninja ZX-25R / ZX-10R, Honda CBR600RR, Yamaha R1'
+            },
+            'boxer': {
+                tag: 'Boxer (Flat-Twin)',
+                title: 'Mesin Boxer / Dua Silinder Horisontal Berlawanan',
+                desc: 'Dua silinder yang diletakkan mendatar secara horizontal dan saling bertolak belakang. Gerakan piston yang saling berlawanan arah secara otomatis menetralkan getaran primer mesin tanpa memerlukan balancer tambahan.',
+                sound: 'Suara ketukan mesin berdengung khas dengan karakteristik mekanis yang terasa hidup di bawah kaki.',
+                advantage: 'Pusat gravitasi motor menjadi sangat rendah, kestabilan luar biasa saat touring jarak jauh.',
+                examples: 'BMW R 1250 GS, BMW R nineT'
+            },
+            'inline-3': {
+                tag: 'Inline-3 (Triple)',
+                title: 'Mesin Tiga Silinder Segaris (Triple)',
+                desc: 'Konfigurasi tiga silinder yang menjembatani kelebihan terbaik dari mesin twin (torsi bawah responsif) dan mesin 4 silinder (tenaga putaran atas yang kuat). Menghadirkan efisiensi ruang dengan performa yang sangat adiktif.',
+                sound: 'Raungan serak unik bernada tinggi yang berbeda dari inline-4 maupun twin.',
+                advantage: 'Rentang tenaga (*powerband*) sangat luas di semua putaran mesin, lincah dan bertenaga.',
+                examples: 'Yamaha MT-09 / Tracer 900, Triumph Street Triple 765'
+            }
+        };
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function filterEngines(category) {
+            const cards = document.querySelectorAll('.engine-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-industrial-accent', 'text-white', 'shadow-md');
+                btn.classList.add('glass-panel', 'text-slate-300');
+            });
+            event.target.classList.remove('glass-panel', 'text-slate-300');
+            event.target.classList.add('bg-industrial-accent', 'text-white', 'shadow-md');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        const modal = document.getElementById('engine-modal');
+        const modalContainer = document.getElementById('modal-container');
+
+        function openModal(engineKey) {
+            const data = engineData[engineKey];
+            if (!data) return;
+
+            document.getElementById('modal-tag').innerText = data.tag;
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-desc').innerText = data.desc;
+            document.getElementById('modal-sound').innerText = data.sound;
+            document.getElementById('modal-advantage').innerText = data.advantage;
+            document.getElementById('modal-examples').innerText = data.examples;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContainer.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContainer.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        function calculateRecommendation() {
+            const style = document.getElementById('sim-style').value;
+            const priority = document.getElementById('sim-priority').value;
+
+            const placeholder = document.getElementById('result-placeholder');
+            const content = document.getElementById('result-content');
+
+            placeholder.classList.add('hidden');
+            content.classList.remove('hidden');
+
+            let title = '';
+            let badge = '';
+            let desc = '';
+            let pro = '';
+            let cc = '';
+
+            if (style === 'touring' || priority === 'efficiency') {
+                title = 'Boxer (Flat-Twin) atau Parallel-Twin';
+                badge = 'Adventure & Endurance Winner';
+                desc = 'Untuk perjalanan jarak jauh dan petualangan, mesin dengan traksi stabil serta getaran minimal adalah kunci utama untuk mencegah kelelahan berkendara.';
+                pro = 'Kestabilan pusat gravitasi & torsi bawah merata';
+                cc = '650cc - 1250cc';
+            } else if (style === 'speed' || priority === 'hp') {
+                title = 'Inline-4 (Four-Cylinder)';
+                badge = 'High Performance Sport';
+                desc = 'Jika prioritas Anda adalah kecepatan puncak dan raungan adrenalin di sirkuit atau jalanan terbuka, konfigurasi 4 silinder segaris adalah pilihan mutlak.';
+                pro = 'Tenaga puncak luar biasa & putaran mesin tinggi';
+                cc = '600cc - 1000cc+';
+            } else if (style === 'city') {
+                title = 'Single-Cylinder (Thumper) / Inline-3';
+                badge = 'Agile & Responsive Urban';
+                desc = 'Penggunaan harian di perkotaan membutuhkan respons gas instan di putaran bawah serta bobot motor yang ringan agar lincah bermanuver di kemacetan.';
+                pro = 'Bobot ringan, irit, & torsi awal spontan';
+                cc = '150cc - 400cc';
+            } else {
+                title = 'V-Twin (90° / 45°)';
+                badge = 'Cruiser & Soul Character';
+                desc = 'Untuk gaya berkendara santai dengan karakter suara dentuman mesin yang berwibawa dan penuh gaya estetika klasik otomotif.';
+                pro = 'Karakter suara kuat & torsi mid-range padat';
+                cc = '800cc - 1800cc+';
+            }
+
+            document.getElementById('res-title').innerText = title;
+            document.getElementById('res-badge').innerText = badge;
+            document.getElementById('res-desc').innerText = desc;
+            document.getElementById('res-pro').innerText = pro;
+            document.getElementById('res-cc').innerText = cc;
+        }
+    </script>
+</body>
+</html>
